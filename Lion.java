@@ -53,11 +53,14 @@ import java.awt.*;
    /* Return Roar for bear and pounce for others
     * @param opponent: the opponent critter's name
     * @return: ROAR if opponent is B, POUNCE otherwise
+    * increment fightTime each time is called
     */
    public Attack fight(String opponent) {
  		if (opponent.equals("B")){
+      fightTimes++;
       return Attack.ROAR;
     } else {
+      fightTimes++;
       return Attack.POUNCE;
     }
  	}
