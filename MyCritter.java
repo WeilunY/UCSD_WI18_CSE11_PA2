@@ -53,11 +53,7 @@ public class MyCritter extends Critter{
       // So the higher chance Lion will use Pounce
       case "L":
         lion++;
-        fightWay = r.nextInt(bear + 2);
-        switch(fightWay){
-          case 0: return Attack.SCRATCH;
-          default: return Attack.POUNCE;
-        }
+        return Attack.SCRATCH;
 
       // When the opponent is tiger
       // if the number is greater than 0, return roar
@@ -84,11 +80,11 @@ public class MyCritter extends Critter{
       // The more bear I have encounted (beated) means there are less lion out there
       // the defalut will return random attack
       case "D":
-        fightWay = r.nextInt(bear + 2);
+        fightWay = r.nextInt(bear + 3);
         switch(fightWay){
           case 0: return Attack.POUNCE;
           default:
-            fightWay = r.nextInt(lion + 2);
+            fightWay = r.nextInt(lion + 3);
             switch(fightWay){
               case 0: return Attack.ROAR;
               default:
