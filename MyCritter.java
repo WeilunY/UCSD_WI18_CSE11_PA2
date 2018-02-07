@@ -1,18 +1,22 @@
 import java.awt.*;
 import java.util.Random;
+
 /*  @author: cs11wml
  *  PID: A15017352
  *  Class name: Bear
  *  Class type: subclass of Critter
  *  Constructor: public MyCritter()
  */
+ 
 public class MyCritter extends Critter{
 
   /* data field:
    * bear: the number of bear have fought
    * lion: the number of lion have fought
-   * tiger: the number of tiger have fought
-   * dragon: the number of dragon have fought
+   * r: random generator
+   * fightWay: the random attack number
+   * step: the total steps take
+   * count: the number of mycritter alive in the field
    */
   private static int bear = 0;
   private static int lion = 0;
@@ -21,10 +25,15 @@ public class MyCritter extends Critter{
   private int step = 0;
   private static int count = 0;
 
+  // Constructor
+  // increment the number of count
   public MyCritter(){
     count++;
   }
 
+  /* Return whether my critter eat or not
+   * @return: true if take more than 10 steps, false otherwise
+   */
   @Override
   public boolean eat(){
     if(step >= 10){
@@ -33,14 +42,16 @@ public class MyCritter extends Critter{
     else{
       return false;
     }
-
-
   }
 
+  /* Return the attack stradegy base on different opponent
+   * @param opponent: the opponent's name
+   * @return different attack stradegy base on different opponent
+   * details below:
+   */
   @Override
   public Attack fight(String opponent) {
 
-    //total *= 4 ;
 		switch(opponent){
       // When the opponent is bear always roar
       case "B":
@@ -54,7 +65,7 @@ public class MyCritter extends Critter{
         return Attack.SCRATCH;
 
       // When the opponent is tiger
-      // if the number is greater than 0, return roar
+      // if the number is greater than 0 (1-12), return roar
       // if the number is 0, return scratch
       case "1":
       case "2":
@@ -65,6 +76,9 @@ public class MyCritter extends Critter{
       case "7":
       case "8":
       case "9":
+      case "10":
+      case "11":
+      case "12":
         return Attack.ROAR;
 
       case"0":
@@ -106,6 +120,10 @@ public class MyCritter extends Critter{
     }
 	}
 
+
+  /* return the color of mycritter
+   * @return switch between blue and red, like a police light
+   */
   @Override
 	public Color getColor() {
     if (step % 2 == 0)
@@ -114,14 +132,6 @@ public class MyCritter extends Critter{
       return Color.RED;
 	}
 
-	/*public Direction getMove() {
-    step++;
-    if(step % 2 == 0)
-      return Direction.EAST;
-    else
-      return Direction.NORTH;
-	}
-*/
 
 // Experiment Chasing stradegy
   @Override
@@ -132,7 +142,7 @@ public class MyCritter extends Critter{
     String right = getNeighbor(Direction.EAST);
     String down = getNeighbor(Direction.SOUTH);
 
-    if(count > 15){
+    if(count > 12){
       if(left.equals("B") || up.equals("B"))
         return Direction.CENTER;
 
@@ -144,6 +154,7 @@ public class MyCritter extends Critter{
           }
         }
 
+      // When less than 13 left, start to pirotize mating
       else{
         if(down.equals("M") || left.equals("M"))
           return Direction.CENTER;
@@ -165,16 +176,19 @@ public class MyCritter extends Critter{
 
   }
 
+  // decrement count when die
   @Override
   public void lose(){
     count--;
   }
 
+  // increment when mate
   @Override
   public void mate(){
     count++;
   }
 
+  // Always return M to represent MyCritter
   @Override
 	public String toString() {
 		return "M";
