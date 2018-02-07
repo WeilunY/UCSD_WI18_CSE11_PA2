@@ -60,9 +60,8 @@ public class MyCritter extends Critter{
         }
 
       // When the opponent is tiger
-      // generate random number base on the number of I have eaten
-      // the more bear I eat means there are less food for tiger, so the higher chance it will be hungry
-      // So the higher chance Lion will use SCRATCH
+      // if the number is greater than 0, return roar
+      // if the number is 0, return scratch
       case "1":
       case "2":
       case "3":
@@ -77,7 +76,7 @@ public class MyCritter extends Critter{
       case"0":
         return Attack.SCRATCH;
 
-      // When the opponent is lion
+      // When the opponent is dragon
       // generate random number base on the number of bear
       // The more bear I have encounted (beated) means there are less bear out there
       // So there will be higher chance for other attack
@@ -115,74 +114,80 @@ public class MyCritter extends Critter{
 
 
 	public Color getColor() {
-		return Color.BLUE;
+    if (step % 2 == 0)
+		  return Color.BLUE;
+    else
+      return Color.RED;
 	}
 
 	public Direction getMove() {
-    // reset step once it reaches 8 times total
-    total = step * 2;
-    if (step == total)
-      step = 0;
-
-    // Go West of South if step is smaller than 10
-    if (step < total / 4 ){
-      // if step is even then go west
-      if (step % 2 == 0){
-        step++;
-        return Direction.WEST;
-      }
-      // go south otherwise
-      else{
-        step++;
-        return Direction.SOUTH;
-      }
-    }
-
-      // Go South or East if the step >= 10 and < 20
-      else if (step < total / 2){
-        // if step is even then go south
-        if (step % 2 == 0){
-          step++;
-          return Direction.SOUTH;
-        }
-        // go east otherwise
-        else{
-          step++;
-          return Direction.EAST;
-        }
-      }
-
-      // Go North or East if the step >= 20 and < 30
-      else if (step < total * 3 / 4){
-        // if step is even then go East
-        if (step % 2 == 0){
-          step++;
-          return Direction.EAST;
-        }
-        // go north otherwise
-        else{
-          step++;
-          return Direction.NORTH;
-        }
-      }
-
-      // Go North or West if the step >= 30 and < 40
-      else{
-        // if step is even then go North
-        if (step % 2 == 0){
-          step++;
-          return Direction.NORTH;
-        }
-        // go West otherwise
-        else{
-          step++;
-          return Direction.WEST;
-        }
-      }
-
+    step++;
+    if(step % 2 == 0)
+      return Direction.EAST;
+    else
+      return Direction.NORTH;
 	}
 
 	public String toString() {
 		return "M";
 	}
 }
+
+/*   total = step + 8;
+
+  // Go West of South if step is smaller than 10
+  if (step < total / 4 ){
+    // if step is even then go west
+    if (step % 2 == 0){
+      step++;
+      return Direction.WEST;
+    }
+    // go south otherwise
+    else{
+      step++;
+      return Direction.SOUTH;
+    }
+  }
+
+    // Go South or East if the step >= 10 and < 20
+    else if (step < total / 2){
+      // if step is even then go south
+      if (step % 2 == 0){
+        step++;
+        return Direction.SOUTH;
+      }
+      // go east otherwise
+      else{
+        step++;
+        return Direction.EAST;
+      }
+    }
+
+    // Go North or East if the step >= 20 and < 30
+    else if (step < total * 3 / 4){
+      // if step is even then go East
+      if (step % 2 == 0){
+        step++;
+        return Direction.EAST;
+      }
+      // go north otherwise
+      else{
+        step++;
+        return Direction.NORTH;
+      }
+    }
+
+    // Go North or West if the step >= 30 and < 40
+    else{
+      // if step is even then go North
+      if (step % 2 == 0){
+        step++;
+        return Direction.NORTH;
+      }
+      // go West otherwise
+      else{
+        step++;
+        return Direction.WEST;
+      }
+    }
+*/
