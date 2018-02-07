@@ -38,6 +38,7 @@ import java.util.Random;
     /* Always return true
      * increment foodEaten each time eat;
      */
+    @Override
     public boolean eat(){
       foodEaten++;
       return true;
@@ -46,6 +47,7 @@ import java.util.Random;
     /* Return the color of the dragon
      * @return Black if foodEaten is even , White otherwise
      */
+    @Override
     public Color getColor(){
       if(foodEaten % 2 == 0)
         return Color.BLACK;
@@ -58,6 +60,7 @@ import java.util.Random;
      * @return: Roar if preMons is Bear, Pounce if preMons is Lion, Scratch otherwise
      * random attack if no preMons
      */
+    @Override
     public Attack fight(String opponent) {
      switch(preMons){
        case "B":
@@ -86,6 +89,7 @@ import java.util.Random;
      * Increment step for each step takes
      * @return direction base on step
      */
+    @Override
     public Direction getMove() {
       // reset step once it reaches 40
       if (step == 40)
@@ -150,6 +154,7 @@ import java.util.Random;
    }
 
     // Always return D
+    @Override
     public String toString() {
      return "D";
    }

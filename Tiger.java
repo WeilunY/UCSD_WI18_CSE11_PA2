@@ -39,6 +39,7 @@ public class Tiger extends Critter{
      * @return: True if eatTimes < hungry; false otherwise
      * incremnent eatTimes everytime eat
      */
+    @Override
     public boolean eat(){
       if (eatTimes < hunger){
         eatTimes++;
@@ -52,6 +53,7 @@ public class Tiger extends Critter{
     /* Return the color of the lion
      * @return Yellow
      */
+    @Override
     public Color getColor(){
       return Color.YELLOW;
     }
@@ -60,6 +62,7 @@ public class Tiger extends Critter{
      * @param opponent: the opponent critter's name
      * @return: SCRATCH if eatTimes < hunger, POUNCE otherwise
      */
+    @Override
     public Attack fight(String opponent) {
      if (eatTimes < hunger){
        return Attack.SCRATCH;
@@ -73,6 +76,7 @@ public class Tiger extends Critter{
      * Randomly generate a number and move for 3 times
      * @return randomly chose direction for 3 times
      */
+    @Override
     public Direction getMove() {
       // create a new random
       Random r = new Random();
@@ -103,6 +107,7 @@ public class Tiger extends Critter{
    }
 
     // return the number of food the tiger still want to eat.
+    @Override
     public String toString() {
      return Integer.toString(hunger - eatTimes);
    }

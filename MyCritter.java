@@ -14,15 +14,15 @@ public class MyCritter extends Critter{
    * tiger: the number of tiger have fought
    * dragon: the number of dragon have fought
    */
-  private int bear = 0;
-  private int lion = 0;
-  private int total = 0;
+  private static int bear = 0;
+  private static int lion = 0;
   private Random r = new Random();
   private int fightWay;
   private int step = 0;
+  private static int count = 0;
 
   public MyCritter(){
-
+    count++;
   }
 
   @Override
@@ -48,9 +48,7 @@ public class MyCritter extends Critter{
         return Attack.ROAR;
 
       // When the opponent is lion
-      // generate random number base on the number of bear
-      // the more bear I have encounted (beated) means there are less bear out there
-      // So the higher chance Lion will use Pounce
+      // Since I am not bear, alwats return scratch
       case "L":
         lion++;
         return Attack.SCRATCH;
@@ -108,7 +106,7 @@ public class MyCritter extends Critter{
     }
 	}
 
-
+  @Override
 	public Color getColor() {
     if (step % 2 == 0)
 		  return Color.BLUE;
@@ -116,74 +114,69 @@ public class MyCritter extends Critter{
       return Color.RED;
 	}
 
-	public Direction getMove() {
+	/*public Direction getMove() {
     step++;
     if(step % 2 == 0)
       return Direction.EAST;
     else
       return Direction.NORTH;
 	}
+*/
 
+// Experiment Chasing stradegy
+  @Override
+  public Direction getMove(){
+    step++;
+    String left = getNeighbor(Direction.WEST);
+    String up = getNeighbor(Direction.NORTH);
+    String right = getNeighbor(Direction.EAST);
+    String down = getNeighbor(Direction.SOUTH);
+
+    if(count > 15){
+      if(left.equals("B") || up.equals("B"))
+        return Direction.CENTER;
+
+        else{
+          if(step % 2 == 0)
+            return Direction.EAST;
+          else
+            return Direction.NORTH;
+          }
+        }
+
+      else{
+        if(down.equals("M") || left.equals("M"))
+          return Direction.CENTER;
+
+        else if(up.equals("M"))
+          return Direction.NORTH;
+
+        else if(right.equals("M"))
+          return Direction.EAST;
+
+        else{
+          if(step % 2 == 0)
+            return Direction.EAST;
+          else
+            return Direction.NORTH;
+          }
+
+      }
+
+  }
+
+  @Override
+  public void lose(){
+    count--;
+  }
+
+  @Override
+  public void mate(){
+    count++;
+  }
+
+  @Override
 	public String toString() {
 		return "M";
 	}
 }
-
-/*   total = step + 8;
-
-  // Go West of South if step is smaller than 10
-  if (step < total / 4 ){
-    // if step is even then go west
-    if (step % 2 == 0){
-      step++;
-      return Direction.WEST;
-    }
-    // go south otherwise
-    else{
-      step++;
-      return Direction.SOUTH;
-    }
-  }
-
-    // Go South or East if the step >= 10 and < 20
-    else if (step < total / 2){
-      // if step is even then go south
-      if (step % 2 == 0){
-        step++;
-        return Direction.SOUTH;
-      }
-      // go east otherwise
-      else{
-        step++;
-        return Direction.EAST;
-      }
-    }
-
-    // Go North or East if the step >= 20 and < 30
-    else if (step < total * 3 / 4){
-      // if step is even then go East
-      if (step % 2 == 0){
-        step++;
-        return Direction.EAST;
-      }
-      // go north otherwise
-      else{
-        step++;
-        return Direction.NORTH;
-      }
-    }
-
-    // Go North or West if the step >= 30 and < 40
-    else{
-      // if step is even then go North
-      if (step % 2 == 0){
-        step++;
-        return Direction.NORTH;
-      }
-      // go West otherwise
-      else{
-        step++;
-        return Direction.WEST;
-      }
-    }
-*/

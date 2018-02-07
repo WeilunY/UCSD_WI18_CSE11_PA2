@@ -33,6 +33,7 @@ import java.awt.*;
     * @return: True if fightTimes > 0; false otherwise
     * set fightTimes to 0 if return true;
     */
+   @Override
    public boolean eat(){
      if (this.fightTimes > 0) {
        fightTimes = 0;
@@ -46,6 +47,7 @@ import java.awt.*;
    /* Return the color of the lion
     * @return RED
     */
+   @Override
    public Color getColor(){
      return Color.RED;
    }
@@ -55,6 +57,7 @@ import java.awt.*;
     * @return: ROAR if opponent is B, POUNCE otherwise
     * increment fightTime each time is called
     */
+   @Override
    public Attack fight(String opponent) {
  		if (opponent.equals("B")){
       fightTimes++;
@@ -71,6 +74,7 @@ import java.awt.*;
     * NORTH for third 5, and EAST for eorth 5
     * increment step for every step take
     */
+   @Override
    public Direction getMove() {
      // Start a new cycle when total step reach 20
      if(step == 20)
@@ -104,6 +108,7 @@ import java.awt.*;
  	}
 
    // Always return L
+   @Override
    public String toString() {
  		return "L";
  	}
