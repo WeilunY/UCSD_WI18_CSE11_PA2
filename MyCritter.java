@@ -7,7 +7,7 @@ import java.util.Random;
  *  Class type: subclass of Critter
  *  Constructor: public MyCritter()
  */
- 
+
 public class MyCritter extends Critter{
 
   /* data field:
@@ -143,6 +143,8 @@ public class MyCritter extends Critter{
     String down = getNeighbor(Direction.SOUTH);
 
     if(count > 12){
+      
+      // if meet bear, wait for it
       if(left.equals("B") || up.equals("B"))
         return Direction.CENTER;
 
